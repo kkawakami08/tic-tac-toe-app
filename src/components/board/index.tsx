@@ -3,7 +3,7 @@
 import { determineWinner } from "@/lib/utils";
 import { useGameData } from "../context-provider";
 import BoardItem from "./board-item";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Board = () => {
   const {
@@ -15,9 +15,22 @@ const Board = () => {
     setTurnOrder,
     winner,
     setWinner,
+    setPlayerStats,
   } = useGameData();
 
-  const currentPlayer = player ? "O" : "X";
+  const initialRender = useRef(true);
+
+  const currentPlayer = player ? "X" : "O";
+
+  const updateScore = (player: "playerA" | "playerB") => {
+    setPlayerStats((prev) => ({
+      ...prev,
+      [player]: {
+        ...prev[player],
+        score: prev[player].score + 1,
+      },
+    }));
+  };
 
   const handleBoxClick = (location: number) => {
     if (board[location] !== null) {
@@ -33,21 +46,38 @@ const Board = () => {
   };
 
   const turnEndProcess = () => {
-    if (turnOrder + 1 == 10) {
+    if (turnOrder == 9) {
       setWinner("Tie Game!");
       return;
     }
     const gameWinner = determineWinner(board, currentPlayer);
     if (gameWinner) {
-      setWinner(`${!player ? "Player 1" : "Player 2"} wins!`);
+      if (player) {
+        //player 1 wins
+        setWinner("Player 1 wins!");
+        updateScore("playerA");
+      } else {
+        //player 2 wins
+        setWinner("Player 2 wins!");
+        updateScore("playerB");
+      }
+
       return;
     } else {
+      console.log("updating game");
       setPlayer((prev) => !prev);
       setTurnOrder((prev) => prev + 1);
     }
   };
   useEffect(() => {
-    turnEndProcess();
+    if (initialRender.current) {
+      initialRender.current = false;
+    }
+    const emptyBoard = board.every((cell) => cell === null);
+    if (!emptyBoard && winner === null) {
+      console.log(turnOrder);
+      turnEndProcess();
+    }
   }, [board]);
 
   return (

@@ -4,10 +4,9 @@ import { X, Circle } from "lucide-react";
 import { useGameData } from "../context-provider";
 import { Button } from "../ui/button";
 
-const Scoreboard = () => {
+const InfoText = () => {
   const { player, winner, resetGame } = useGameData();
-  const currentPlayer = player ? "Player 2" : "Player 1";
-
+  const currentPlayer = player ? "Player 1" : "Player 2";
   const icon =
     currentPlayer === "Player 1" ? (
       <X strokeWidth={3} size={30} className="text-perfection-yellow" />
@@ -16,7 +15,7 @@ const Scoreboard = () => {
     );
 
   return (
-    <div className="text-2xl  min-h-20 ">
+    <div className="text-2xl  ">
       {winner ? (
         <div className="flex  gap-3 items-center justify-between">
           <p>{winner}</p>
@@ -34,4 +33,4 @@ const Scoreboard = () => {
   );
 };
 
-export default Scoreboard;
+export default InfoText;

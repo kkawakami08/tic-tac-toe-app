@@ -1,4 +1,5 @@
 "use client";
+import { Circle, LucideIcon, X } from "lucide-react";
 import {
   createContext,
   Dispatch,
@@ -6,6 +7,11 @@ import {
   useContext,
   useState,
 } from "react";
+
+type PlayerStat = {
+  playerA: { icon: LucideIcon; score: number };
+  playerB: { icon: LucideIcon; score: number };
+};
 
 type GameData = {
   board: (string | null)[];
@@ -17,27 +23,53 @@ type GameData = {
   winner: null | string;
   setWinner: Dispatch<SetStateAction<string | null>>;
   resetGame: () => void;
+  resetFullGame: () => void;
+  playerStats: PlayerStat;
+  setPlayerStats: Dispatch<SetStateAction<PlayerStat>>;
 };
-
-const initialGameState = {
-  board: Array(9).fill(null),
+const getInitialGameState = () => ({
+  board: Array(9).fill(null) as (string | null)[],
   player: true,
-  turnOrder: 0,
+  turnOrder: 1,
   winner: null,
-};
+  playerStats: {
+    playerA: {
+      icon: X,
+      score: 0,
+    },
+    playerB: {
+      icon: Circle,
+      score: 0,
+    },
+  },
+});
 
 const GameContext = createContext<GameData | undefined>(undefined);
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
-  const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null));
-  const [player, setPlayer] = useState(true);
-  const [turnOrder, setTurnOrder] = useState(0);
-  const [winner, setWinner] = useState<string | null>(null);
+  const [board, setBoard] = useState<(string | null)[]>(
+    getInitialGameState().board
+  );
+  const [player, setPlayer] = useState(getInitialGameState().player);
+  const [turnOrder, setTurnOrder] = useState(getInitialGameState().turnOrder);
+  const [winner, setWinner] = useState<string | null>(
+    getInitialGameState().winner
+  );
+  const [playerStats, setPlayerStats] = useState(
+    getInitialGameState().playerStats
+  );
+
   const resetGame = () => {
+    const initialGameState = getInitialGameState();
     setBoard(initialGameState.board);
     setPlayer(initialGameState.player);
     setTurnOrder(initialGameState.turnOrder);
     setWinner(initialGameState.winner);
+  };
+  const resetFullGame = () => {
+    const initialGameState = getInitialGameState();
+    resetGame();
+    setPlayerStats(initialGameState.playerStats);
   };
   return (
     <GameContext.Provider
@@ -50,7 +82,10 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
         setTurnOrder,
         winner,
         setWinner,
+        playerStats,
+        setPlayerStats,
         resetGame,
+        resetFullGame,
       }}
     >
       {children}
