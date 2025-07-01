@@ -10,8 +10,8 @@ const ScoreBoard = () => {
   const PlayerBIcon = playerStats.playerB.icon;
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex items-center mx-5 gap-3">
+    <div className="flex flex-col items-center gap-5">
+      <div className="flex items-center mx-5 gap-3  md:flex-col">
         <div className="space-y-3 border-perfection-red border-2 rounded-xl p-5">
           <p className="text-3xl text-perfection-yellow font-semibold text-center">
             Player 1
@@ -51,7 +51,10 @@ const ScoreBoard = () => {
           </div>
         </div>
       </div>
-      <Button onClick={resetFullGame} className="text-lg bg-perfection-red ">
+      <Button
+        onClick={resetFullGame}
+        className="text-lg sm:text-xl sm:py-6 bg-perfection-red "
+      >
         Reset Full Game
       </Button>
     </div>

@@ -26,14 +26,14 @@ const BoardItem = ({
 
   const icon =
     info === "X" ? (
-      <X strokeWidth={3} size={70} />
+      <X className="size-24 sm:size-36 stroke-3" />
     ) : (
-      <Circle strokeWidth={3} size={55} />
+      <Circle strokeWidth={2.5} className="size-18 sm:size-24 stroke-3 " />
     );
 
   return (
     <div
-      className="flex items-center justify-center size-24 border-2 rounded-md  border-perfection-dark-blue bg-perfection-dark-blue"
+      className="flex items-center justify-center size-28 sm:size-36 border-2 rounded-md  border-perfection-dark-blue bg-perfection-dark-blue"
       onClick={clickBox}
     >
       <span className="text-perfection-yellow ">{info ? icon : " "}</span>

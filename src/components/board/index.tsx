@@ -4,6 +4,7 @@ import { determineWinner } from "@/lib/utils";
 import { useGameData } from "../context-provider";
 import BoardItem from "./board-item";
 import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 const Board = () => {
   const {
@@ -34,7 +35,7 @@ const Board = () => {
 
   const handleBoxClick = (location: number) => {
     if (board[location] !== null) {
-      console.log("this box is taken");
+      toast.error("This space is occupied!");
       return;
     }
 

@@ -9,13 +9,16 @@ const InfoText = () => {
   const currentPlayer = player ? "Player 1" : "Player 2";
   const icon =
     currentPlayer === "Player 1" ? (
-      <X strokeWidth={3} size={30} className="text-perfection-yellow" />
+      <X strokeWidth={3} className="text-perfection-yellow size-9 sm:size-10" />
     ) : (
-      <Circle strokeWidth={4} size={20} className="text-perfection-yellow" />
+      <Circle
+        strokeWidth={4}
+        className="text-perfection-yellow size-7 sm:size-9"
+      />
     );
 
   return (
-    <div className="text-2xl  ">
+    <div className="text-3xl sm:text-4xl min-h-12 w-fit mx-auto">
       {winner ? (
         <div className="flex  gap-3 items-center justify-between">
           <p>{winner}</p>
