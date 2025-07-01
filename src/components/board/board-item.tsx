@@ -28,7 +28,7 @@ const BoardItem = ({
     info === "X" ? (
       <X className="size-24 sm:size-36 stroke-3" />
     ) : (
-      <Circle strokeWidth={2.5} className="size-18 sm:size-24 stroke-3 " />
+      <Circle className="size-18 sm:size-24 stroke-3 " />
     );
 
   return (

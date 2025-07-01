@@ -47,10 +47,6 @@ const Board = () => {
   };
 
   const turnEndProcess = () => {
-    if (turnOrder == 9) {
-      setWinner("Tie Game!");
-      return;
-    }
     const gameWinner = determineWinner(board, currentPlayer);
     if (gameWinner) {
       if (player) {
@@ -64,11 +60,15 @@ const Board = () => {
       }
 
       return;
-    } else {
-      console.log("updating game");
-      setPlayer((prev) => !prev);
-      setTurnOrder((prev) => prev + 1);
     }
+    const fullBoard = board.every((cell) => cell !== null);
+    if (fullBoard) {
+      setWinner("Tie Game!");
+      return;
+    }
+    // console.log("updating game");
+    setPlayer((prev) => !prev);
+    setTurnOrder((prev) => prev + 1);
   };
   useEffect(() => {
     if (initialRender.current) {
@@ -77,8 +77,10 @@ const Board = () => {
     const emptyBoard = board.every((cell) => cell === null);
     if (!emptyBoard && winner === null) {
       console.log(turnOrder);
+
       turnEndProcess();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board]);
 
   return (
