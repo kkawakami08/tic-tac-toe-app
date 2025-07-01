@@ -39,7 +39,7 @@ const Board = () => {
     }
     const gameWinner = determineWinner(board, currentPlayer);
     if (gameWinner) {
-      setWinner(`${currentPlayer} wins`);
+      setWinner(`${!player ? "Player 1" : "Player 2"} wins!`);
       return;
     } else {
       setPlayer((prev) => !prev);
@@ -51,7 +51,7 @@ const Board = () => {
   }, [board]);
 
   return (
-    <div className="mx-auto grid grid-cols-3 gap-1   w-fit">
+    <div className="mx-auto grid grid-cols-3 gap-2 bg-perfection-red p-2 rounded-xl  w-fit ">
       {board.map((_, index) => (
         <BoardItem
           key={index}
