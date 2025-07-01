@@ -12,7 +12,7 @@ const ScoreBoard = () => {
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="flex items-center mx-5 gap-3  md:flex-col">
-        <div className="space-y-3 border-perfection-red border-2 rounded-xl p-5">
+        <div className="space-y-3 border-perfection-red border-2 rounded-xl px-5 py-3">
           <p className="text-3xl text-perfection-yellow font-semibold text-center">
             Player 1
           </p>
@@ -31,7 +31,7 @@ const ScoreBoard = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-3 border-perfection-red border-2 rounded-xl p-5">
+        <div className="space-y-3 border-perfection-red border-2 rounded-xl px-5 py-3">
           <p className="text-3xl text-perfection-yellow font-semibold text-center">
             Player 2
           </p>

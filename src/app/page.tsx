@@ -5,7 +5,7 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <div className=" flex items-center flex-col  gap-10 min-h-screen justify-center md:gap-16">
+    <div className=" flex items-center flex-col  gap-5  min-h-screen justify-center md:gap-16 pt-5 md:p-0">
       <div className=" text-center space-y-3">
         <h1 className="text-5xl font-extrabold bg-primary text-center text-perfection-yellow  rounded-xl w-fit mx-auto px-5 py-2 ">
           TIC-TAC-TOE
